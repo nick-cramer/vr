@@ -88,6 +88,13 @@
         <a-entity template="src: #link" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-gloveboxes', 'nav-glassware')" rotation="0 0 0" position="2 0 -9"></a-entity>
       </a-entity>
 
+      <!-- Glassware nav -->
+      <a-entity id="nav-glassware" visible="false">
+        <a-entity template="src: #link" data-src="#glovebox" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-gloveboxes')" rotation="0 -195 0" position="-3 0 8"></a-entity>
+        <a-entity template="src: #link" data-src="#open-cabinet" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-open-cabinet')" rotation="0 -165 0" position="3 0 8"></a-entity>
+        <a-entity template="src: #link" data-src="#hood" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-hood')" rotation="0 35 0" position="-5 0 -7"></a-entity>
+      </a-entity>
+
       <!--
       -->
 
