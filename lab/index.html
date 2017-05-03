@@ -11,11 +11,26 @@
     <script src="components/aframe-template-component@3.1.1"></script>
     <script src="components/set-image.js"></script>
     <script>
+    var sceneNames = {
+      "nav-entrance": "Entrance",
+      "nav-foyer": "Foyer",
+      "nav-storage": "Storage",
+      "nav-glovebox": "Glovebox",
+      "nav-solvents": "Solvents",
+      "nav-disposal-and-log": "Disposal and Log",
+      "nav-open-cabinet": "Open Cabinet",
+      "nav-gloveboxes": "Gloveboxes",
+      "nav-glassware": "Glassware",
+      "nav-aisle": "Aisle",
+      "nav-hood-glovebox": "Hood and Glovebox",
+      "nav-hood": "Hood",
+      "nav-nmr": "NMR"
+    };
     function go(leaveScene, enterScene) {
       console.log("GO!");
       document.getElementById(leaveScene).setAttribute("visible", false);
       document.getElementById(enterScene).setAttribute("visible", true);
-
+      document.getElementById("sceneName").setAttribute("text", 'value: ' + sceneNames[enterScene]);
     }
     </script>
   </head>
@@ -141,6 +156,10 @@
           raycaster=""></a-cursor>
 
         <!-- <a-plane height="1" width="1" position="0 0 -1" color="black" material="opacity: .5;" ></a-plane> -->
+        <a-entity id="sceneName" position="-0.9 0.75 -1"
+          geometry="primitive: plane; width: 1; height: .1"
+          material="color: black; opacity: 0.5"
+          text="value: Entrance"></a-entity>
       </a-entity>
     </a-scene>
   </body>
