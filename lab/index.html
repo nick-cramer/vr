@@ -11,26 +11,10 @@
     <script src="components/aframe-template-component@3.1.1"></script>
     <script src="components/set-image.js"></script>
     <script>
-    var sceneNames = {
-      "nav-entrance": "Entrance",
-      "nav-foyer": "Foyer",
-      "nav-storage": "Storage",
-      "nav-glovebox": "Glovebox",
-      "nav-solvents": "Solvents",
-      "nav-disposal-and-log": "Disposal and Log",
-      "nav-open-cabinet": "Open Cabinet",
-      "nav-gloveboxes": "Gloveboxes",
-      "nav-glassware": "Glassware",
-      "nav-aisle": "Aisle",
-      "nav-hood-glovebox": "Hood and Glovebox",
-      "nav-hood": "Hood",
-      "nav-nmr": "NMR"
-    };
     function go(leaveScene, enterScene) {
       console.log("GO!");
       document.getElementById(leaveScene).setAttribute("visible", false);
       document.getElementById(enterScene).setAttribute("visible", true);
-      document.getElementById("sceneName").setAttribute("text", 'value: ' + sceneNames[enterScene]);
     }
     </script>
   </head>
@@ -57,7 +41,13 @@
 
         <audio id="click-sound" crossorigin="anonymous" src="audio/click.ogg"></audio>
 
-        <!-- Image link template to be reused. -->
+        <!-- Templates to be reused. -->
+        <script id="name" type="text/html">
+          <a-entity class="name"
+            text="align: center; anchor: center; width: 1.5; color: white; value: ${name}"
+            position="0 -1 0"
+            rotation="-90 0 0"></a-entity>
+        </script>
         <script id="link" type="text/html">
           <a-entity class="link"
             geometry="primitive: plane; height: 1; width: 1"
@@ -76,12 +66,15 @@
       <a-sky id="image-360" radius="10" src="#entrance" phi-start="90"></a-sky>
 
       <!-- Entrance nav -->
-      <a-entity id="nav-entrance" layout="type: line; margin: 1.5" position="0 0 -7">
-        <a-entity template="src: #link" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-entrance', 'nav-foyer')"></a-entity>
+      <a-entity id="nav-entrance">
+        <a-entity template="src: #name" data-name="Entrance"></a-entity>
+        <a-entity template="src: #link" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-entrance', 'nav-foyer')" position="0 0 -7"></a-entity>
+        </a-entity>
       </a-entity>
 
       <!-- Foyer nav -->
       <a-entity id="nav-foyer" visible="false">
+        <a-entity template="src: #name" data-name="Foyer"></a-entity>
         <a-entity template="src: #link" data-src="#glovebox" data-thumb="#vantage-point" onclick="go('nav-foyer', 'nav-glovebox')" rotation="0 -15 0" position="2 0 -7"></a-entity>
         <a-entity template="src: #link" data-src="#storage" data-thumb="#vantage-point" onclick="go('nav-foyer', 'nav-storage')" rotation="0 -120 0" position="7 0 3.5"></a-entity>
         <a-entity template="src: #link" data-src="#solvents" data-thumb="#vantage-point" onclick="go('nav-foyer', 'nav-solvents')" rotation="0 45 0" position="-7 0 -6"></a-entity>
@@ -89,17 +82,20 @@
 
       <!-- Solvents nav -->
       <a-entity id="nav-solvents" visible="false">
+        <a-entity template="src: #name" data-name="Solvents"></a-entity>
         <a-entity template="src: #link" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-solvents', 'nav-foyer')" rotation="0 -100 0" position="8.5 0 0"></a-entity>
       </a-entity>
 
       <!-- Glovebox nav -->
       <a-entity id="nav-glovebox" visible="false">
+        <a-entity template="src: #name" data-name="Glovebox"></a-entity>
         <a-entity template="src: #link" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-glovebox', 'nav-foyer')" rotation="0 -140 0" position="5 0 6"></a-entity>
         <a-entity template="src: #link" data-src="#gloveboxes" data-thumb="#vantage-point" onclick="go('nav-glovebox', 'nav-gloveboxes')" rotation="0 40 0" position="-9 0 -3"></a-entity>
       </a-entity>
 
       <!-- Storage nav -->
       <a-entity id="nav-storage" visible="false">
+        <a-entity template="src: #name" data-name="Storage"></a-entity>
         <a-entity template="src: #link" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-storage', 'nav-foyer')" rotation="0 -180 0" position="0 0 8"></a-entity>
         <a-entity template="src: #link" data-src="#open-cabinet" data-thumb="#vantage-point" onclick="go('nav-storage', 'nav-open-cabinet')" rotation="0 -70 0" position="6 0 -7"></a-entity>
         <a-entity template="src: #link" data-src="#disposal-and-log" data-thumb="#vantage-point" onclick="go('nav-storage', 'nav-disposal-and-log')" rotation="0 0 0" position="0 0 -8"></a-entity>
@@ -107,12 +103,14 @@
 
       <!-- Gloveboxes nav -->
       <a-entity id="nav-gloveboxes" visible="false">
+        <a-entity template="src: #name" data-name="Gloveboxes"></a-entity>
         <a-entity template="src: #link" data-src="#glovebox" data-thumb="#vantage-point" onclick="go('nav-gloveboxes', 'nav-glovebox')" rotation="0 -180 0" position="0 0 8"></a-entity>
         <a-entity template="src: #link" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-gloveboxes', 'nav-glassware')" rotation="0 0 0" position="2 0 -9"></a-entity>
       </a-entity>
 
       <!-- Glassware nav -->
       <a-entity id="nav-glassware" visible="false">
+        <a-entity template="src: #name" data-name="Glassware"></a-entity>
         <a-entity template="src: #link" data-src="#glovebox" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-gloveboxes')" rotation="0 -195 0" position="-3 0 8"></a-entity>
         <a-entity template="src: #link" data-src="#disposal-and-log" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-disposal-and-log')" rotation="0 -165 0" position="3 0 8"></a-entity>
         <a-entity template="src: #link" data-src="#hood" data-thumb="#vantage-point" onclick="go('nav-glassware', 'nav-hood')" rotation="0 -35 0" position="5 0 -7"></a-entity>
@@ -121,12 +119,14 @@
 
       <!-- Open cabinet nav -->
       <a-entity id="nav-open-cabinet" visible="false">
+        <a-entity template="src: #name" data-name="Open Cabinet"></a-entity>
         <a-entity template="src: #link" data-src="#disposal-and-log" data-thumb="#vantage-point" onclick="go('nav-open-cabinet', 'nav-disposal-and-log')" rotation="0 105 0" position="-8 0 3"></a-entity>
         <a-entity template="src: #link" data-src="#storage" data-thumb="#vantage-point" onclick="go('nav-open-cabinet', 'nav-storage')" rotation="0 -90 0" position="8 0 0"></a-entity>
       </a-entity>
 
       <!-- Disposal and log nav -->
       <a-entity id="nav-disposal-and-log" visible="false">
+        <a-entity template="src: #name" data-name="Disposal and Log"></a-entity>
         <a-entity template="src: #link" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-disposal-and-log', 'nav-glassware')" rotation="0 80 0" position="-8.5 0 -3.5"></a-entity>
         <a-entity template="src: #link" data-src="#storage" data-thumb="#vantage-point" onclick="go('nav-disposal-and-log', 'nav-storage')" rotation="0 -145 0" position="4 0 7"></a-entity>
         <a-entity template="src: #link" data-src="#open-cabinet" data-thumb="#vantage-point" onclick="go('nav-disposal-and-log', 'nav-open-cabinet')" rotation="0 -70 0" position="7 0 5"></a-entity>
@@ -134,11 +134,13 @@
 
       <!-- Hood nav -->
       <a-entity id="nav-hood" visible="false">
+        <a-entity template="src: #name" data-name="Hood"></a-entity>
         <a-entity template="src: #link" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-hood', 'nav-glassware')" rotation="0 -100 0" position="8 0 3"></a-entity>
       </a-entity>
 
       <!-- Aisle nav -->
       <a-entity id="nav-aisle" visible="false">
+        <a-entity template="src: #name" data-name="Aisle"></a-entity>
         <a-entity template="src: #link" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-aisle', 'nav-glassware')" rotation="0 170 0" position="-3 0 8"></a-entity>
       </a-entity>
 
@@ -156,10 +158,6 @@
           raycaster=""></a-cursor>
 
         <!-- <a-plane height="1" width="1" position="0 0 -1" color="black" material="opacity: .5;" ></a-plane> -->
-        <a-entity id="sceneName" position="-0.9 0.75 -1"
-          geometry="primitive: plane; width: 1; height: .1"
-          material="color: black; opacity: 0.5"
-          text="value: Entrance"></a-entity>
       </a-entity>
     </a-scene>
   </body>
