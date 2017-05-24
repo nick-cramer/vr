@@ -16,6 +16,9 @@
       document.getElementById(leaveScene).setAttribute("visible", false);
       document.getElementById(enterScene).setAttribute("visible", true);
     }
+    function check() {
+      console.log(this, arguments);
+    }
     </script>
   </head>
   <body>
@@ -62,6 +65,10 @@
             <a-entity position="0 -.75 0"
               text="align: center; baseline: top; anchor: center; width: 8; color: white; value: ${name}"></a-entity>
         </script>
+        <script id="answer" type="text/html">
+          <a-box class="answer" depth="0.15" height="0.15" width="0.15" color="grey" position="-.1 0 0"
+            event-set__1="_event: mousedown; color: white"></a-box>
+        </script>
       </a-assets>
 
       <!-- 360-degree image. -->
@@ -71,6 +78,35 @@
       <a-entity id="nav-entrance">
         <a-entity template="src: #name" data-name="Entrance"></a-entity>
         <a-entity template="src: #link" data-name="Foyer" data-src="#foyer" data-thumb="#vantage-point" onclick="go('nav-entrance', 'nav-foyer')" position="0 0 -7"></a-entity>
+        <a-entity position="0 0 -4">
+          <a-text value="Which of the following are NOT compatible with organic acids (choose all that apply):"></a-text>
+          <a-entity position="0 -0.2 0">
+            <a-text value="Concentrated Nitric Acid"></a-text>
+            <a-entity template="src: #answer" data-check='green'></a-entity>
+          </a-entity>
+          <a-entity position="0 -0.4 0">
+            <a-text value="6M Hydrochloric Acid"></a-text>
+            <a-entity template="src: #answer" data-check='green'></a-entity>
+          </a-entity>
+          <a-entity position="0 -0.6 0">
+            <a-text value="Acetic Acid"></a-text>
+            <a-entity template="src: #answer" data-check='red'></a-entity>
+          </a-entity>
+          <a-entity position="0 -0.8 0">
+            <a-text value="Acetone"></a-text>
+            <a-entity template="src: #answer" data-check='green'></a-entity>
+          </a-entity>
+          <a-entity position="0 -1 0">
+            <a-text value="Hexane"></a-text>
+            <a-entity template="src: #answer" data-check='red'></a-entity>
+          </a-entity>
+          <a-entity position="0 -1.2 0">
+            <a-text value="Triethylamine"></a-text>
+            <a-entity template="src: #answer" data-check='green'></a-entity>
+          </a-entity>
+          <a-entity position="0 -1.4 0">
+            <a-text value="Submit" material="color: blue" geometry="primitive:plane; height:auto; width: auto"></a-text>
+          </a-entity>
         </a-entity>
       </a-entity>
 
@@ -146,10 +182,6 @@
         <a-entity template="src: #link" data-name="Glassware" data-src="#glassware" data-thumb="#vantage-point" onclick="go('nav-aisle', 'nav-glassware')" rotation="0 170 0" position="-3 0 8"></a-entity>
       </a-entity>
 
-      <!--
-      -->
-
-
       <!-- Camera + cursor. -->
       <a-entity camera look-controls>
         <a-cursor id="cursor"
@@ -158,8 +190,6 @@
           event-set__1="_event: mouseenter; color: springgreen"
           event-set__2="_event: mouseleave; color: black"
           raycaster=""></a-cursor>
-
-        <!-- <a-plane height="1" width="1" position="0 0 -1" color="black" material="opacity: .5;" ></a-plane> -->
       </a-entity>
     </a-scene>
   </body>
